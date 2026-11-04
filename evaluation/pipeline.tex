@@ -1,0 +1,55 @@
+% RETRACE pipeline, same style as the thesis overview (Fig. "Overview of the v2 pipeline").
+% Needs: \usepackage[dvipsnames]{xcolor}, \usepackage{tikz},
+%        \usetikzlibrary{positioning, arrows.meta, fit}
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[node distance=0.9cm and 1.0cm]
+    \tikzset{
+      stage/.style = {rectangle, rounded corners=5pt, draw=NavyBlue!70, fill=NavyBlue!8,
+                      text width=2.6cm, align=center, minimum height=1.9cm, font=\small\sffamily},
+      ext/.style   = {rectangle, rounded corners=5pt, dashed, draw=gray!60, fill=gray!8,
+                      text width=2.3cm, align=center, minimum height=1.9cm, font=\small\sffamily},
+      outbox/.style = {rectangle, rounded corners=5pt, draw=ForestGreen!70, fill=ForestGreen!8,
+                      text width=2.6cm, align=center, minimum height=1.9cm, font=\small\sffamily},
+      arr/.style   = {->, >=Stealth, thick, draw=NavyBlue!60},
+      note/.style  = {font=\footnotesize\sffamily, text=gray, align=center, text width=2.8cm},
+    }
+    % indexing (top row)
+    \node[ext] (pdf) {Regulation PDF\\(or DOCX via\\pandoc)};
+    \node[ext, right=of pdf] (layout) {Layout parser\\PyMuPDF lines\\or MinerU};
+    \node[stage, right=of layout] (decoder) {\textbf{Structure\\decoder}\\numbering grammar\\+ layout cues};
+    \node[stage, right=of decoder] (index) {\textbf{Clause index}\\section text\\+ heading path};
+    \node[stage, right=of index] (graph) {Cross-reference\\graph\\clause $\to$ clause};
+
+    % querying (bottom row)
+    \node[ext, below=1.6cm of layout] (q) {Question /\\requirement};
+    \node[stage, right=of q] (retr) {\textbf{Hybrid retrieval}\\BM25 + dense, RRF\\one hit per clause};
+    \node[stage, right=of retr] (ctx) {Context\\whole clauses\\within the\\token budget};
+    \node[stage, right=of ctx] (reader) {Reader LLM};
+    \node[outbox, right=of reader] (ans) {\textbf{Traceable answer}\\cited clause IDs\\(test cases, QA)};
+
+    \draw[arr] (pdf) -- (layout);
+    \draw[arr] (layout) -- node[above, font=\scriptsize\sffamily]{lines} (decoder);
+    \draw[arr] (decoder) -- node[above, font=\scriptsize\sffamily]{tree} (index);
+    \draw[arr] (index) -- (graph);
+    \draw[arr] (q) -- (retr);
+    \draw[arr] (retr) -- (ctx);
+    \draw[arr] (ctx) -- (reader);
+    \draw[arr] (reader) -- (ans);
+    \draw[arr] (index.south) -- ++(0,-0.45) -| (retr.north);
+    \draw[arr, dashed] (graph.south) -- node[right, font=\scriptsize\sffamily, align=left]{optional\\expansion} (ctx.north east);
+
+    \node[note, above=0.15cm of decoder] {Stage 1};
+    \node[note, above=0.15cm of index] {Stage 2};
+    \node[note, below=0.15cm of retr] {Stage 3};
+    \node[note, below=0.15cm of ctx] {Stage 4};
+    \node[note, below=0.15cm of reader] {Stage 5};
+  \end{tikzpicture}%
+  }
+  \caption{RETRACE pipeline. Indexing (top) recovers the clause hierarchy of a regulation and
+  indexes every clause with its heading path; querying (bottom) retrieves whole clauses so that
+  every answer can be traced to the clause IDs it rests on. For ADN 2025 (1,146 pages) the
+  decoder recovers 3,071 headings, which give 2,820 clause units.}
+  \label{fig:pipeline}
+\end{figure}

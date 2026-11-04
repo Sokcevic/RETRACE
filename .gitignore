@@ -73,3 +73,9 @@ chat_ui/venv_mineru/
 /evaluate/
 /run_targeted.py
 /extracted_scenarios_number.csv
+
+# ADN-QA data: derived from the UNECE/CCNR question catalogues; redistribution not yet
+# cleared. Rebuild with datasets/adn-qa/scripts (download_sources.py -> parse_catalogue.py -> build_dataset.py).
+datasets/adn-qa/data/
+datasets/adn-qa/corpus/*.tsv
+datasets/adn-qa/corpus/*.jsonl

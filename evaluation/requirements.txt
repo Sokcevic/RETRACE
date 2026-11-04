@@ -1,0 +1,8 @@
+numpy>=2.0
+scipy>=1.13
+rank_bm25==0.2.2
+rapidfuzz>=3.9
+sentence-transformers>=3.0   # BAAI/bge-small-en-v1.5, runs on CPU
+torch>=2.3
+pymupdf>=1.24
+openai>=1.40                 # client only; point it at any OpenAI-compatible server (e.g. vLLM on iSYS)

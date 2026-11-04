@@ -3,6 +3,8 @@
 
 pydantic>=2.7,<3.0
 beautifulsoup4>=4.12,<5.0
+pymupdf>=1.24.0  # PDF layout for the structure decoder (parsing/structure_decoder.py)
+pypdf>=4.0  # optional: skips tagged tables during structure decoding
 llama-index-core>=0.12
 llama-index-llms-openai-like>=0.7
 dynamiq>=0.50

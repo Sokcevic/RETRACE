@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import re
 
-_NUM_RE = re.compile(r"^\d+(\.\d+)*$")
+_NUM_RE = re.compile(r"^[A-Z]?\d+(\.\d+)*$")  # optional letter prefix: ADGM "A1.2"
 _APPENDIX_RE = re.compile(r"^(Annex\b.*?)\s*-\s*Appendix\b", re.IGNORECASE)
 _ANNEX_RE = re.compile(r"^Annex\b", re.IGNORECASE)
 _SEP = " / "  # separates an annex container from its inner numbering

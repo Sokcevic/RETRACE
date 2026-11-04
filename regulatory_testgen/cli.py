@@ -14,6 +14,10 @@ Usage examples:
   # Increase parallelism for faster generation
   python -m regulatory_testgen run R152r2E.md --workers 8
 
+  # Clause structure comes from the source PDF by default (R152r2E_origin.pdf
+  # next to the Markdown); reproduce the thesis' MinerU-only parsing with:
+  python -m regulatory_testgen run R152r2E.md --parser markdown
+
   # Inspect intermediate graph stats
   python -m regulatory_testgen graph-stats --output-dir output
 """
@@ -51,6 +55,8 @@ def cmd_run(args: argparse.Namespace) -> None:
         llm=llm_config,
         output_dir=args.output_dir,
         workers=args.workers,
+        parser=args.parser,
+        pdf_path=args.pdf,
     )
 
     test_cases = run_pipeline(args.markdown, config)
@@ -79,8 +85,15 @@ def main(argv: list[str] | None = None) -> None:
 
     # --- run ---
     run_parser = sub.add_parser("run", help="Run the full pipeline")
-    run_parser.add_argument("markdown", help="Path to MinerU Markdown output file")
+    run_parser.add_argument("markdown", help="Path to MinerU Markdown output file (or the source PDF)")
     run_parser.add_argument("--output-dir", default="output")
+    run_parser.add_argument(
+        "--parser",
+        choices=["decoder", "markdown"],
+        default="decoder",
+        help="decoder: clause structure from the PDF (default); markdown: MinerU-only parser",
+    )
+    run_parser.add_argument("--pdf", default=None, help="Source PDF (default: <stem>_origin.pdf next to the Markdown)")
     run_parser.add_argument(
         "--base-url",
         default="https://api.openai.com/v1",

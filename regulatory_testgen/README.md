@@ -6,10 +6,12 @@ Dynamiq (agent orchestration) and LlamaIndex (Graph-RAG).
 ## Architecture
 
 ```
-MinerU PDF → Markdown
-      ↓
-Stage 1: Parse (parsing/markdown_parser.py)
-      ↓  247 Clause objects
+MinerU PDF → Markdown            source PDF
+      ↓                               ↓
+      ↓            structure decoder (parsing/structure_decoder.py)
+      ↓                               ↓  clause ids + hierarchy
+Stage 1: Parse (parsing/pdf_parser.py: text from Markdown, structure from PDF)
+      ↓  Clause objects
 Stage 2: Tables (extraction/tables.py)
       ↓  14 RegulationTable objects
 Stage 3: Build Knowledge Graph (LlamaIndex PropertyGraphStore)
@@ -27,6 +29,7 @@ Stage 4: Generate test cases (Dynamiq ReAct agent × 84 testable clauses)
 | BFS transitive closure | Guarantees complete cross-reference context (BifrostRAG +12.3 F1) |
 | Dynamiq ReAct Agent | Interleaved reasoning + tool calls; agent can follow unexpected refs |
 | Template + instantiation | Table-driven clauses: one LLM template × N rows = N identical-structure tests |
+| Clause structure from the PDF | MinerU flattens every heading to one level and drops/splits clause numbers; the decoder reads the PDF layout and keeps the globally most consistent chain of clause numbers instead |
 
 ## Setup
 
@@ -52,13 +55,36 @@ venv/bin/python -m regulatory_testgen run \
 
 # Inspect graph stats after running
 venv/bin/python -m regulatory_testgen graph-stats --output-dir output
+
+# Reproduce the thesis' MinerU-only parsing (the bundled checkpoints in output/ use it)
+venv/bin/python -m regulatory_testgen run /path/to/R152r2E.md --parser markdown
 ```
+
+### Stage 1 parsers
+
+By default (`--parser decoder`) the clause hierarchy comes from the source PDF:
+`parsing/structure_decoder.py` reads the layout with PyMuPDF, treats every line
+that starts with a number (`5.2.1`, `A1.2`, `II.`, `B.`, `(2)`) as a candidate,
+and keeps the best chain of legal successors over the whole document, so footnote
+markers, numbered table rows and figure labels cannot break the tree. Annexes and
+appendices namespace their clauses (`Annex 3 / 5.1`) like `structure_ids.py`.
+Clause text, and with it the HTML tables Stage 2 reads, still comes from MinerU's
+Markdown: each decoded heading is aligned to its Markdown line.
+
+The PDF is found as `--pdf`, as the input itself (PDF-only: text from the PDF), or
+as MinerU's `<stem>_origin.pdf` next to the Markdown. Without one the pipeline
+falls back to the Markdown parser. If the PDF is tagged and `pypdf` is installed,
+text inside tagged tables is ignored. In the chat UI, uploads use the decoder when
+MinerU produced a source PDF; set `REGULATORY_PARSER=markdown` to switch it off.
+
+On R152 the decoder finds 268 clauses (the Markdown parser: 231), every clause's
+parent is present in the graph, and Stage 2 extracts the same 13 tables.
 
 ## Output
 
 | File | Contents |
 |---|---|
-| `01_clauses.json` | Parsed clause objects (247 for R152) |
+| `01_clauses.json` | Parsed clause objects (269 for R152 with the decoder, 253 with `--parser markdown`) |
 | `01b_classifications.json` | LLM clause category classifications |
 | `02_graph_summary.json` | Graph statistics + clause index |
 | `03_test_cases.json` | Full TestCase objects with traceability |
@@ -81,7 +107,8 @@ regulatory_testgen/
 ├── pipeline.py           4-stage orchestration with JSON checkpoints
 ├── export.py             JSON + CSV writers
 ├── cli.py                argparse CLI (`python -m regulatory_testgen`)
-├── parsing/              Markdown → Clause objects (markdown_parser.py, tree_builder.py)
+├── parsing/              PDF structure decoder + Markdown → Clause objects
+│                         (structure_decoder.py, pdf_parser.py, markdown_parser.py, tree_builder.py)
 ├── extraction/           Clause text → tables/references/requirements
 ├── data_models/          Clause, DocumentTree, RegulationTable, and related dataclasses
 └── output/               Pre-computed checkpoints for the bundled R152 regulation

@@ -237,8 +237,13 @@ def ingest_document(
     # Stage 2: parse — 0.40-0.45
     progress_cb(0.40, "Parsing document structure…")
     from regulatory_testgen.structure_ids import namespace_clauses
-    clauses = parse_markdown_clauses(md_path)
-    clauses = recover_missing_numeric_parents(clauses)
+    if conversion.source_pdf_path is not None and os.environ.get("REGULATORY_PARSER", "decoder") == "decoder":
+        # clause hierarchy from the PDF layout, clause text (and tables) from MinerU
+        from regulatory_testgen.parsing.pdf_parser import parse_pdf_clauses
+        clauses = parse_pdf_clauses(conversion.source_pdf_path, md_path)
+    else:
+        clauses = parse_markdown_clauses(md_path)
+        clauses = recover_missing_numeric_parents(clauses)
     clauses = namespace_clauses(clauses)  # annex clauses → namespaced ids (graph/index consistent)
     save_clauses(clauses, output_dir / "01_clauses.json")
     progress_cb(0.45, f"Parsed {len(clauses)} clauses.")

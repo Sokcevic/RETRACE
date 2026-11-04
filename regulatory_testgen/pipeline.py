@@ -1,6 +1,6 @@
 """Five-stage pipeline for UN regulatory test case generation.
 
-Stage 1: Parse    — MinerU Markdown → List[Clause]
+Stage 1: Parse    — PDF structure + MinerU Markdown text → List[Clause]
 Stage 1b: Classify — LLM semantic clause classification
 Stage 2: Tables   — Clause text → List[RegulationTable]
 Stage 3: Graph    — LlamaIndex PropertyGraphStore
@@ -42,6 +42,7 @@ from regulatory_testgen.parsing.markdown_parser import (
     recover_missing_numeric_parents,
     save_clauses,
 )
+from regulatory_testgen.parsing.pdf_parser import parse_pdf_clauses
 
 # Titles that MinerU strips from section headings; used by recover_missing_numeric_parents.
 _SECTION_TITLE_HINTS: dict[str, str] = {
@@ -74,10 +75,9 @@ def run_pipeline(markdown_path: str | Path, config: PipelineConfig | None = None
 
     # Stage 1 — Parse -------------------------------------------------------
     logger.info("Stage 1: Parsing %s", markdown_path)
-    clauses = parse_markdown_clauses(markdown_path)
-    clauses = recover_missing_numeric_parents(clauses, title_hints=_SECTION_TITLE_HINTS)
+    clauses = parse_clauses(markdown_path, effective)
     save_clauses(clauses, out / "01_clauses.json")
-    logger.info("  → %d clauses extracted (%d after structural recovery)", len(clauses), len(clauses))
+    logger.info("  → %d clauses extracted", len(clauses))
 
     # Stage 1b — Classify ---------------------------------------------------
     classifications_path = out / "01b_classifications.json"
@@ -134,6 +134,41 @@ def run_pipeline(markdown_path: str | Path, config: PipelineConfig | None = None
     logger.info("Results written to %s", out)
 
     return test_cases
+
+
+def parse_clauses(input_path: str | Path, config: PipelineConfig) -> list[Clause]:
+    """Stage 1. input_path is a MinerU Markdown file or the source PDF itself.
+
+    With parser="decoder" the clause hierarchy comes from the PDF and the text
+    from the Markdown (PDF text if there is no Markdown); otherwise, or when no
+    source PDF can be found, the original MinerU Markdown parser runs."""
+    path = Path(input_path)
+    markdown = path if path.suffix.lower() in {".md", ".markdown"} else None
+    if config.pdf_path:
+        pdf = Path(config.pdf_path)
+    elif path.suffix.lower() == ".pdf":
+        pdf = path
+    else:
+        pdf = find_source_pdf(path)
+
+    if config.parser == "decoder":
+        if pdf is not None and pdf.exists():
+            logger.info("  structure from %s%s", pdf, f", text from {markdown}" if markdown else "")
+            return parse_pdf_clauses(pdf, markdown)
+        logger.warning("No source PDF found for %s; falling back to the Markdown parser", path)
+    if markdown is None:
+        raise ValueError(f"The Markdown parser needs a MinerU Markdown file, got {path}")
+    clauses = parse_markdown_clauses(markdown)
+    return recover_missing_numeric_parents(clauses, title_hints=_SECTION_TITLE_HINTS)
+
+
+def find_source_pdf(markdown_path: Path) -> Path | None:
+    """MinerU writes the source PDF next to its Markdown as <stem>_origin.pdf."""
+    for candidate in (markdown_path.with_name(f"{markdown_path.stem}_origin.pdf"),
+                      markdown_path.with_suffix(".pdf")):
+        if candidate.exists():
+            return candidate
+    return None
 
 
 # ---------------------------------------------------------------------------
