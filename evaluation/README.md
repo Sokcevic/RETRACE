@@ -39,4 +39,6 @@ Outputs of a non-default parser get a suffix, e.g. `runs/methods_qasper_mineru.j
 | `eval_qa_methods.py <adn\|qasper>` | `qa_methods_<ds>_<model>.json` | answer quality at matched budgets: closed-book, vanilla, DOS RAG, RETRACE, oracle |
 | `eval_qa.py` | `qa_*.json` | earlier reader QA (top-5 chunks); holds the shared `LLM` client |
 
+The outputs behind the paper's tables are in `evaluation/results/` (see its README).
+
 `rag_core.py` holds chunking (flat windows, structure chunks from the decoder), BM25, dense, RRF and the hit rule.

@@ -1,0 +1,54 @@
+{
+ "obliqa": {
+  "cited 0x": {
+   "n": 134,
+   "flat-200 [dense]": 0.769,
+   "flat-200 [hybrid]": 0.873,
+   "struct-200 [hybrid]": 0.888,
+   "paragraph [dense]": 0.843,
+   "paragraph [hybrid]": 0.896
+  },
+  "cited 1-2x": {
+   "n": 52,
+   "flat-200 [dense]": 0.673,
+   "flat-200 [hybrid]": 0.846,
+   "struct-200 [hybrid]": 0.885,
+   "paragraph [dense]": 0.769,
+   "paragraph [hybrid]": 0.885
+  },
+  "cited 3+x": {
+   "n": 14,
+   "flat-200 [dense]": 0.714,
+   "flat-200 [hybrid]": 0.857,
+   "struct-200 [hybrid]": 0.786,
+   "paragraph [dense]": 0.714,
+   "paragraph [hybrid]": 0.786
+  }
+ },
+ "qasper": {
+  "cited 0x": {
+   "n": 256,
+   "flat-200 [dense]": 0.699,
+   "flat-200 [hybrid]": 0.762,
+   "struct-200 [hybrid]": 0.832,
+   "paragraph [dense]": 0.824,
+   "paragraph [hybrid]": 0.84
+  },
+  "cited 1-2x": {
+   "n": 47,
+   "flat-200 [dense]": 0.745,
+   "flat-200 [hybrid]": 0.745,
+   "struct-200 [hybrid]": 0.787,
+   "paragraph [dense]": 0.83,
+   "paragraph [hybrid]": 0.766
+  },
+  "cited 3+x": {
+   "n": 6,
+   "flat-200 [dense]": 0.833,
+   "flat-200 [hybrid]": 0.667,
+   "struct-200 [hybrid]": 0.667,
+   "paragraph [dense]": 0.5,
+   "paragraph [hybrid]": 0.333
+  }
+ }
+}

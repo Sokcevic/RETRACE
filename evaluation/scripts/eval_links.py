@@ -20,7 +20,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent))
 import eval_methods as em  # noqa: E402
+import rag_core  # noqa: E402
 from rag_core import encode_queries, is_hit, structure_chunks  # noqa: E402
+from significance import bootstrap  # noqa: E402
 
 LINKS = (0, 1, 2, 3, 5)
 BUDGETS = (1000, 2000, 4000)
@@ -49,17 +51,20 @@ def main():
     xr = {r["id"]: r for r in json.load(open(em.W / f"runs/xref_{ds}.json"))}
     cited = np.array([xr[q["id"]]["indegree"] > 0 for q in queries])
     qvecs = encode_queries([q["query"] for q in queries])
-    res = {}
+    res, per = {}, {}
     for L in LINKS:
         hits = {B: [] for B in BUDGETS}
         for q, qv in zip(queries, qvecs):
             ranked, seen = [], set()
             for i in para.ranked(q, qv, "hybrid"):
+                # every retrieved piece stays in the ranking; System.context applies the
+                # paragraph rule (short clause whole, long clause piece by piece), so L = 0
+                # equals RETRACE in eval_methods.py. Links are inserted once per clause.
+                ranked.append(i)
                 key = (chunks[i].doc, chunks[i].node)
                 if key in seen:
                     continue
                 seen.add(key)
-                ranked.append(i)
                 for r in refs[key][:L]:
                     j = first.get((key[0], r))
                     if j is not None:
@@ -68,13 +73,16 @@ def main():
                 ctx = para.context(ranked, B)
                 hits[B].append(any(is_hit(c, g) for c in ctx for g in q["gold"]))
         res[f"L={L}"] = {}
+        per[L] = {B: np.array(hits[B], float) for B in BUDGETS}
         for B in BUDGETS:
-            h = np.array(hits[B], float)
+            h = per[L][B]
             res[f"L={L}"][f"hit@{B}w"] = {"all": round(h.mean(), 3), "gold cited": round(h[cited].mean(), 3),
                                            "gold not cited": round(h[~cited].mean(), 3)}
+            if L:
+                res[f"L={L}"][f"hit@{B}w"]["vs L=0"] = bootstrap(per[L][B], per[0][B], 10000)
         print(f"L={L}", json.dumps(res[f"L={L}"]), flush=True)
     res["n"] = {"all": len(queries), "gold cited": int(cited.sum())}
-    (em.W / f"runs/links_{ds}.json").write_text(json.dumps(res, indent=1))
+    (em.W / f"runs/links_{ds}{rag_core.tag()}.json").write_text(json.dumps(res, indent=1))
 
 
 if __name__ == "__main__":

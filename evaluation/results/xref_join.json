@@ -1,0 +1,106 @@
+{
+ "adn": {
+  "cited 0x": {
+   "n": 181,
+   "flat-200 [dense]": 0.376,
+   "flat-200 [hybrid]": 0.464,
+   "struct-200 [hybrid]": 0.541,
+   "paragraph [dense]": 0.519,
+   "paragraph [hybrid]": 0.536
+  },
+  "cited 1-2x": {
+   "n": 153,
+   "flat-200 [dense]": 0.536,
+   "flat-200 [hybrid]": 0.68,
+   "struct-200 [hybrid]": 0.699,
+   "paragraph [dense]": 0.667,
+   "paragraph [hybrid]": 0.699
+  },
+  "cited 3+x": {
+   "n": 312,
+   "flat-200 [dense]": 0.558,
+   "flat-200 [hybrid]": 0.593,
+   "struct-200 [hybrid]": 0.702,
+   "paragraph [dense]": 0.631,
+   "paragraph [hybrid]": 0.696
+  }
+ },
+ "obliqa": {
+  "cited 0x": {
+   "n": 138,
+   "flat-200 [dense]": 0.79,
+   "flat-200 [hybrid]": 0.877,
+   "struct-200 [hybrid]": 0.899,
+   "paragraph [dense]": 0.877,
+   "paragraph [hybrid]": 0.899
+  },
+  "cited 1-2x": {
+   "n": 50,
+   "flat-200 [dense]": 0.78,
+   "flat-200 [hybrid]": 0.9,
+   "struct-200 [hybrid]": 0.88,
+   "paragraph [dense]": 0.78,
+   "paragraph [hybrid]": 0.88
+  },
+  "cited 3+x": {
+   "n": 12,
+   "flat-200 [dense]": 0.667,
+   "flat-200 [hybrid]": 0.75,
+   "struct-200 [hybrid]": 0.75,
+   "paragraph [dense]": 0.667,
+   "paragraph [hybrid]": 0.75
+  }
+ },
+ "lbrag": {
+  "cited 0x": {
+   "n": 677,
+   "flat-200 [dense]": 0.352,
+   "flat-200 [hybrid]": 0.323,
+   "struct-200 [hybrid]": 0.295,
+   "paragraph [dense]": 0.335,
+   "paragraph [hybrid]": 0.294
+  },
+  "cited 1-2x": {
+   "n": 79,
+   "flat-200 [dense]": 0.177,
+   "flat-200 [hybrid]": 0.139,
+   "struct-200 [hybrid]": 0.215,
+   "paragraph [dense]": 0.19,
+   "paragraph [hybrid]": 0.203
+  },
+  "cited 3+x": {
+   "n": 20,
+   "flat-200 [dense]": 0.05,
+   "flat-200 [hybrid]": 0.0,
+   "struct-200 [hybrid]": 0.05,
+   "paragraph [dense]": 0.05,
+   "paragraph [hybrid]": 0.05
+  }
+ },
+ "qasper": {
+  "cited 0x": {
+   "n": 223,
+   "flat-200 [dense]": 0.623,
+   "flat-200 [hybrid]": 0.659,
+   "struct-200 [hybrid]": 0.682,
+   "paragraph [dense]": 0.637,
+   "paragraph [hybrid]": 0.677
+  },
+  "cited 1-2x": {
+   "n": 37,
+   "flat-200 [dense]": 0.622,
+   "flat-200 [hybrid]": 0.568,
+   "struct-200 [hybrid]": 0.649,
+   "paragraph [dense]": 0.568,
+   "paragraph [hybrid]": 0.676
+  },
+  "cited 3+x": {
+   "n": 5,
+   "flat-200 [dense]": 0.6,
+   "flat-200 [hybrid]": 0.6,
+   "struct-200 [hybrid]": 0.4,
+   "paragraph [dense]": 0.6,
+   "paragraph [hybrid]": 0.4
+  }
+ }
+}

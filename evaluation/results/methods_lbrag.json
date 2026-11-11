@@ -1,0 +1,73 @@
+{
+ "parser": "pymupdf",
+ "n_queries": 776,
+ "n_docs": 358,
+ "results": {
+  "flat-200 [dense]": {
+   "hit@500w": 0.2526,
+   "recall@500w": 0.188,
+   "hit@1000w": 0.326,
+   "recall@1000w": 0.2617,
+   "hit@2000w": 0.3892,
+   "recall@2000w": 0.3259,
+   "hit@4000w": 0.4549,
+   "recall@4000w": 0.3993,
+   "hit@1unit": 0.1418
+  },
+  "flat-200 [hybrid]": {
+   "hit@500w": 0.1972,
+   "recall@500w": 0.1447,
+   "hit@1000w": 0.2964,
+   "recall@1000w": 0.2238,
+   "hit@2000w": 0.3905,
+   "recall@2000w": 0.3168,
+   "hit@4000w": 0.4639,
+   "recall@4000w": 0.3954,
+   "hit@1unit": 0.107
+  },
+  "struct-200 [dense]": {
+   "hit@500w": 0.2436,
+   "recall@500w": 0.1778,
+   "hit@1000w": 0.3183,
+   "recall@1000w": 0.2521,
+   "hit@2000w": 0.3814,
+   "recall@2000w": 0.3152,
+   "hit@4000w": 0.4562,
+   "recall@4000w": 0.3957,
+   "hit@1unit": 0.1198
+  },
+  "struct-200 [hybrid]": {
+   "hit@500w": 0.1959,
+   "recall@500w": 0.1404,
+   "hit@1000w": 0.2809,
+   "recall@1000w": 0.2075,
+   "hit@2000w": 0.3879,
+   "recall@2000w": 0.3102,
+   "hit@4000w": 0.4485,
+   "recall@4000w": 0.3831,
+   "hit@1unit": 0.0876
+  },
+  "paragraph [dense]": {
+   "hit@500w": 0.2423,
+   "recall@500w": 0.1761,
+   "hit@1000w": 0.3131,
+   "recall@1000w": 0.2502,
+   "hit@2000w": 0.3814,
+   "recall@2000w": 0.3167,
+   "hit@4000w": 0.4588,
+   "recall@4000w": 0.4008,
+   "hit@1unit": 0.1224
+  },
+  "paragraph [hybrid]": {
+   "hit@500w": 0.192,
+   "recall@500w": 0.1376,
+   "hit@1000w": 0.2784,
+   "recall@1000w": 0.2053,
+   "hit@2000w": 0.384,
+   "recall@2000w": 0.3094,
+   "hit@4000w": 0.451,
+   "recall@4000w": 0.3871,
+   "hit@1unit": 0.0889
+  }
+ }
+}

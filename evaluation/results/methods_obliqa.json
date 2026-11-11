@@ -1,0 +1,182 @@
+{
+ "n_queries": 200,
+ "n_docs": 3,
+ "results": {
+  "flat-100 [dense]": {
+   "hit@500w": 0.695,
+   "recall@500w": 0.636,
+   "hit@1000w": 0.8,
+   "recall@1000w": 0.7402,
+   "hit@2000w": 0.865,
+   "recall@2000w": 0.8209,
+   "hit@4000w": 0.925,
+   "recall@4000w": 0.8818,
+   "hit@1unit": 0.435
+  },
+  "flat-100 [hybrid]": {
+   "hit@500w": 0.825,
+   "recall@500w": 0.7468,
+   "hit@1000w": 0.885,
+   "recall@1000w": 0.8171,
+   "hit@2000w": 0.935,
+   "recall@2000w": 0.8743,
+   "hit@4000w": 0.96,
+   "recall@4000w": 0.9157,
+   "hit@1unit": 0.505
+  },
+  "struct-100 [dense]": {
+   "hit@500w": 0.77,
+   "recall@500w": 0.654,
+   "hit@1000w": 0.855,
+   "recall@1000w": 0.7567,
+   "hit@2000w": 0.895,
+   "recall@2000w": 0.8172,
+   "hit@4000w": 0.915,
+   "recall@4000w": 0.8512,
+   "hit@1unit": 0.5
+  },
+  "struct-100 [hybrid]": {
+   "hit@500w": 0.85,
+   "recall@500w": 0.7213,
+   "hit@1000w": 0.895,
+   "recall@1000w": 0.806,
+   "hit@2000w": 0.92,
+   "recall@2000w": 0.8494,
+   "hit@4000w": 0.945,
+   "recall@4000w": 0.8884,
+   "hit@1unit": 0.6
+  },
+  "flat-200 [dense]": {
+   "hit@500w": 0.645,
+   "recall@500w": 0.5852,
+   "hit@1000w": 0.78,
+   "recall@1000w": 0.7374,
+   "hit@2000w": 0.855,
+   "recall@2000w": 0.8208,
+   "hit@4000w": 0.91,
+   "recall@4000w": 0.8802,
+   "hit@1unit": 0.42
+  },
+  "flat-200 [hybrid]": {
+   "hit@500w": 0.77,
+   "recall@500w": 0.7277,
+   "hit@1000w": 0.875,
+   "recall@1000w": 0.8327,
+   "hit@2000w": 0.915,
+   "recall@2000w": 0.8852,
+   "hit@4000w": 0.96,
+   "recall@4000w": 0.9314,
+   "hit@1unit": 0.615
+  },
+  "struct-200 [dense]": {
+   "hit@500w": 0.76,
+   "recall@500w": 0.6904,
+   "hit@1000w": 0.845,
+   "recall@1000w": 0.7872,
+   "hit@2000w": 0.885,
+   "recall@2000w": 0.846,
+   "hit@4000w": 0.915,
+   "recall@4000w": 0.876,
+   "hit@1unit": 0.515
+  },
+  "struct-200 [hybrid]": {
+   "hit@500w": 0.84,
+   "recall@500w": 0.7659,
+   "hit@1000w": 0.885,
+   "recall@1000w": 0.8289,
+   "hit@2000w": 0.91,
+   "recall@2000w": 0.8623,
+   "hit@4000w": 0.94,
+   "recall@4000w": 0.8984,
+   "hit@1unit": 0.57
+  },
+  "flat-400 [dense]": {
+   "hit@500w": 0.44,
+   "recall@500w": 0.4133,
+   "hit@1000w": 0.635,
+   "recall@1000w": 0.6052,
+   "hit@2000w": 0.735,
+   "recall@2000w": 0.7018,
+   "hit@4000w": 0.85,
+   "recall@4000w": 0.8196,
+   "hit@1unit": 0.355
+  },
+  "flat-400 [hybrid]": {
+   "hit@500w": 0.615,
+   "recall@500w": 0.5835,
+   "hit@1000w": 0.745,
+   "recall@1000w": 0.7128,
+   "hit@2000w": 0.875,
+   "recall@2000w": 0.8491,
+   "hit@4000w": 0.93,
+   "recall@4000w": 0.901,
+   "hit@1unit": 0.56
+  },
+  "struct-400 [dense]": {
+   "hit@500w": 0.765,
+   "recall@500w": 0.6891,
+   "hit@1000w": 0.855,
+   "recall@1000w": 0.7922,
+   "hit@2000w": 0.885,
+   "recall@2000w": 0.8448,
+   "hit@4000w": 0.91,
+   "recall@4000w": 0.8735,
+   "hit@1unit": 0.515
+  },
+  "struct-400 [hybrid]": {
+   "hit@500w": 0.85,
+   "recall@500w": 0.7627,
+   "hit@1000w": 0.88,
+   "recall@1000w": 0.8246,
+   "hit@2000w": 0.91,
+   "recall@2000w": 0.8635,
+   "hit@4000w": 0.945,
+   "recall@4000w": 0.9022,
+   "hit@1unit": 0.59
+  },
+  "paragraph [dense]": {
+   "hit@500w": 0.755,
+   "recall@500w": 0.6915,
+   "hit@1000w": 0.84,
+   "recall@1000w": 0.7834,
+   "hit@2000w": 0.88,
+   "recall@2000w": 0.8423,
+   "hit@4000w": 0.91,
+   "recall@4000w": 0.8751,
+   "hit@1unit": 0.515
+  },
+  "paragraph [hybrid]": {
+   "hit@500w": 0.845,
+   "recall@500w": 0.7651,
+   "hit@1000w": 0.885,
+   "recall@1000w": 0.8291,
+   "hit@2000w": 0.91,
+   "recall@2000w": 0.8598,
+   "hit@4000w": 0.94,
+   "recall@4000w": 0.8972,
+   "hit@1unit": 0.57
+  },
+  "struct-200-nohdr [dense]": {
+   "hit@500w": 0.82,
+   "recall@500w": 0.7427,
+   "hit@1000w": 0.865,
+   "recall@1000w": 0.8076,
+   "hit@2000w": 0.91,
+   "recall@2000w": 0.8622,
+   "hit@4000w": 0.935,
+   "recall@4000w": 0.8943,
+   "hit@1unit": 0.51
+  },
+  "struct-200-nohdr [hybrid]": {
+   "hit@500w": 0.865,
+   "recall@500w": 0.7976,
+   "hit@1000w": 0.9,
+   "recall@1000w": 0.8486,
+   "hit@2000w": 0.925,
+   "recall@2000w": 0.8747,
+   "hit@4000w": 0.955,
+   "recall@4000w": 0.9067,
+   "hit@1unit": 0.605
+  }
+ }
+}

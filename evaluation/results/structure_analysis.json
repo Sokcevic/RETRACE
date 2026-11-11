@@ -1,0 +1,153 @@
+{
+ "obliqa": {
+  "docs": 3,
+  "words_median": 15048,
+  "headings_per_doc_median": 310.0,
+  "docs_without_headings": 0,
+  "share_words_under_heading": 0.966,
+  "depth": {
+   "1": 676,
+   "2": 165,
+   "3": 584
+  },
+  "styles": {
+   "dotted": 743,
+   "other": 429,
+   "single number": 253
+  },
+  "xrefs_per_doc_median": 128.0,
+  "share_sections_referenced": 0.18,
+  "queries": 200,
+  "queries_gold_referenced": 0.31,
+  "queries_gold_in_front_matter": 0.01
+ },
+ "qasper": {
+  "docs": 99,
+  "words_median": 5573,
+  "headings_per_doc_median": 11.0,
+  "docs_without_headings": 0,
+  "share_words_under_heading": 0.919,
+  "depth": {
+   "1": 747,
+   "2": 391,
+   "3": 58
+  },
+  "styles": {
+   "single number": 662,
+   "dotted": 449,
+   "roman": 37,
+   "letter": 27,
+   "other": 21
+  },
+  "xrefs_per_doc_median": 1.0,
+  "share_sections_referenced": 0.111,
+  "queries": 265,
+  "queries_gold_referenced": 0.158,
+  "queries_gold_in_front_matter": 0.075,
+  "qasper_heading_recall": 0.539,
+  "qasper_heading_precision": 0.618
+ },
+ "adn": {
+  "docs": 1,
+  "words_median": 430332,
+  "headings_per_doc_median": 3071.0,
+  "docs_without_headings": 0,
+  "share_words_under_heading": 1.0,
+  "depth": {
+   "1": 329,
+   "2": 94,
+   "3": 188,
+   "4": 859,
+   "5": 1214,
+   "6": 292,
+   "7": 79,
+   "8": 11,
+   "9": 5
+  },
+  "styles": {
+   "dotted": 2742,
+   "other": 198,
+   "single number": 116,
+   "letter": 8,
+   "roman": 7
+  },
+  "xrefs_per_doc_median": 2779.0,
+  "share_sections_referenced": 0.358,
+  "queries": 646,
+  "queries_gold_referenced": 0.72,
+  "queries_gold_in_front_matter": 0.0
+ },
+ "lbrag": {
+  "docs": 358,
+  "words_median": 8605,
+  "headings_per_doc_median": 12.0,
+  "docs_without_headings": 95,
+  "share_words_under_heading": 0.628,
+  "depth": {
+   "1": 4345,
+   "2": 6257,
+   "3": 1030,
+   "4": 11
+  },
+  "styles": {
+   "dotted": 7298,
+   "single number": 3732,
+   "letter": 236,
+   "roman": 211,
+   "other": 166
+  },
+  "xrefs_per_doc_median": 1.0,
+  "share_sections_referenced": 0.184,
+  "queries": 776,
+  "queries_gold_referenced": 0.128,
+  "queries_gold_in_front_matter": 0.481
+ },
+ "obliqa_mineru": {
+  "docs": 3,
+  "words_median": 14747,
+  "headings_per_doc_median": 303.0,
+  "docs_without_headings": 0,
+  "share_words_under_heading": 0.999,
+  "depth": {
+   "1": 596,
+   "2": 169,
+   "3": 576
+  },
+  "styles": {
+   "dotted": 740,
+   "other": 351,
+   "single number": 250
+  },
+  "xrefs_per_doc_median": 121.0,
+  "share_sections_referenced": 0.194,
+  "queries": 200,
+  "queries_gold_referenced": 0.33,
+  "queries_gold_in_front_matter": 0.0
+ },
+ "qasper_mineru": {
+  "docs": 99,
+  "words_median": 4753,
+  "headings_per_doc_median": 14.0,
+  "docs_without_headings": 2,
+  "share_words_under_heading": 0.912,
+  "depth": {
+   "1": 812,
+   "2": 576,
+   "3": 88
+  },
+  "styles": {
+   "single number": 695,
+   "dotted": 664,
+   "letter": 49,
+   "roman": 47,
+   "other": 21
+  },
+  "xrefs_per_doc_median": 1.0,
+  "share_sections_referenced": 0.119,
+  "queries": 309,
+  "queries_gold_referenced": 0.172,
+  "queries_gold_in_front_matter": 0.074,
+  "qasper_heading_recall": 0.756,
+  "qasper_heading_precision": 0.709
+ }
+}
